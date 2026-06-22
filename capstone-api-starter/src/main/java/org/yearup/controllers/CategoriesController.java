@@ -35,7 +35,7 @@ public class CategoriesController {
     @GetMapping
     public List<Category> getAll() {
         // find and return all categories
-        return null;
+        return categoryService.getAllCategories();
     }
 
     // add the appropriate annotation for a get action

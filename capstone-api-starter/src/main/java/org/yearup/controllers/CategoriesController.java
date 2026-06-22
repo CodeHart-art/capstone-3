@@ -10,20 +10,12 @@ import org.yearup.service.ProductService;
 
 import java.util.List;
 
-// add the annotations to make this a REST controller
-// add the annotation to make this controller the endpoint for the following url
-// http://localhost:8080/categories
-// add annotation to allow cross site origin requests
-
 @RestController
 @RequestMapping("/categories")
 @CrossOrigin("*")
 public class CategoriesController {
     private CategoryService categoryService;
     private ProductService productService;
-
-
-    // create an Autowired constructor to inject the categoryService and productService
 
     @Autowired
     public CategoriesController(CategoryService categoryService, ProductService productService) {
@@ -48,12 +40,11 @@ public class CategoriesController {
     // https://localhost:8080/categories/1/products
     @GetMapping("{categoryId}/products")
     public List<Product> getProductsById(@PathVariable int categoryId) {
-        // get a list of product by categoryId
-        return null;
+        return productService.listByCategoryId(categoryId);
     }
 
     // add annotation to call this method for a POST action
-    // add annotation to ensure that only an ADMIN can call this function
+    @PutMapping
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         // insert the category and return it with status 201 Created
         return null;

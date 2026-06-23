@@ -51,6 +51,7 @@ public class ProductService
         existing.setName(product.getName());
         existing.setPrice(product.getPrice());
         existing.setCategoryId(product.getCategoryId());
+        existing.setStock(product.getStock());
         existing.setDescription(product.getDescription());
         existing.setSubCategory(product.getSubCategory());
         existing.setFeatured(product.isFeatured());

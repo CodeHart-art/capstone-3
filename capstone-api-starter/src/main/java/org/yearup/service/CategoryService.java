@@ -1,5 +1,6 @@
 package org.yearup.service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.yearup.models.Category;
 import org.yearup.repository.CategoryRepository;
@@ -33,14 +34,19 @@ public class CategoryService
         return categoryRepository.save(category);
     }
 
-    public Category update(int categoryId, Category category)
-    {
-        // update category and return the updated category
-        return null;
+    public Category update(int categoryId, Category category) {
+
+        Category existingCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        existingCategory.setName(category.getName());
+        existingCategory.setDescription(category.getDescription());
+
+        return categoryRepository.save(existingCategory);
     }
 
     public void delete(int categoryId)
     {
-        // delete category
+        categoryRepository.deleteById(categoryId);
     }
 }

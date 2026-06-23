@@ -2,6 +2,7 @@ package org.yearup.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.yearup.models.Category;
 import org.yearup.models.Product;
@@ -44,10 +45,10 @@ public class CategoriesController {
     }
 
     // add annotation to call this method for a POST action
-    @PutMapping
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
-        // insert the category and return it with status 201 Created
-        return null;
+        return ResponseEntity.status(201).body(categoryService.create(category));
     }
 
     // add annotation to call this method for a PUT (update) action - the url path must include the categoryId

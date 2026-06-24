@@ -49,6 +49,24 @@ class ProductService {
         return this.photos.filter(p => p == photo).length > 0;
     }
 
+    removeDuplicateProducts(products)
+    {
+        const uniqueProducts = [];
+        const seenProducts = new Set();
+
+        products.forEach(product => {
+            const productKey = product.productId || `${product.name}|${product.imageUrl}|${product.price}`;
+
+            if(!seenProducts.has(productKey))
+            {
+                seenProducts.add(productKey);
+                uniqueProducts.push(product);
+            }
+        });
+
+        return uniqueProducts;
+    }
+
     addCategoryFilter(cat)
     {
         if(cat == 0) this.clearCategoryFilter();
@@ -94,7 +112,7 @@ class ProductService {
         axios.get(url)
              .then(response => {
                  let data = {};
-                 data.products = response.data;
+                 data.products = this.removeDuplicateProducts(response.data);
 
                  data.products.forEach(product => {
                      if(!this.hasPhoto(product.imageUrl))

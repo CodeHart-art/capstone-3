@@ -24,13 +24,32 @@ public class CategoriesController {
         this.productService = productService;
     }
 
+    /**
+     * Retrieves all categories from the system.
+     *
+     * This endpoint handles HTTP GET requests and returns a list of all available
+     * Category objects by delegating the call to the CategoryService.
+     *
+     * @return a list of all Category entities
+     */
     @GetMapping
     public List<Category> getAll() {
         // find and return all categories
         return categoryService.getAllCategories();
     }
 
-    // add the appropriate annotation for a get action
+    /**
+     * Retrieves a category by its ID.
+     *
+     * This endpoint handles HTTP GET requests with a category ID path variable.
+     * It delegates the lookup to the CategoryService and returns the matching
+     * Category if found.
+     *
+     * If no category exists with the given ID, a 404 Not Found response is returned.
+     *
+     * @param id the ID of the category to retrieve
+     * @return a ResponseEntity containing the Category if found, or a 404 status if not
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Category> getById(@PathVariable int id) {
         // get the category by id
@@ -43,8 +62,15 @@ public class CategoriesController {
         return ResponseEntity.ok(category);
     }
 
-    // the url to return all products in category 1 would look like this
-    // https://localhost:8080/categories/1/products
+    /**
+     * Retrieves all products that belong to a specific category.
+     *
+     * This endpoint handles HTTP GET requests using a category ID path variable.
+     * It returns a list of Product objects that are associated with the given category.
+     *
+     * @param categoryId the ID of the category whose products are being retrieved
+     * @return a list of products that belong to the specified category
+     */
     @GetMapping("{categoryId}/products")
     public List<Product> getProductsById(@PathVariable int categoryId) {
         return productService.listByCategoryId(categoryId);

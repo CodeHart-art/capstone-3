@@ -60,6 +60,17 @@ public class ShoppingCartService {
        return getByUserId(userId);
     }
 
+    public ShoppingCart updateCart(int userId,int productId,ShoppingCartItem item){
+
+        CartItem existingCartItem =
+                shoppingCartRepository.findByUserIdAndProductId(userId,productId);
+
+        existingCartItem.setQuantity(item.getQuantity());
+        shoppingCartRepository.save(existingCartItem);
+
+        return getByUserId(userId);
+    }
+
     @Transactional
     public ShoppingCart clearCart(int userId) {
 

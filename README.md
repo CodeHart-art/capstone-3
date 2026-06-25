@@ -166,12 +166,31 @@ During development several issues in the starter code were identified and correc
 One of the most challenging parts of this project was:
 
 ```java
-// Add your challenging code example here
+ public ShoppingCart addToCart(int userId, int id){
+
+    CartItem cartItem = new CartItem();
+
+    cartItem.setUserId(userId);
+    cartItem.setProductId(id);
+
+    CartItem existingCartItem = shoppingCartRepository.findByUserIdAndProductId(userId,id);
+
+    if (existingCartItem != null){
+        existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
+        shoppingCartRepository.save(existingCartItem);
+    }
+    else {
+        shoppingCartRepository.save(cartItem);
+    }
+
+    return getByUserId(userId);
+}
 ```
 
 ### Why It Was Challenging
 
-Describe the problem you were trying to solve, the issues you encountered, and how you eventually resolved them.
+Adding a users item to the cart was because i had to account for whether the item existed and if it didn't exist I had to add it to the cart.
+
 
 ---
 
@@ -180,12 +199,17 @@ Describe the problem you were trying to solve, the issues you encountered, and h
 The piece of code I am most proud of is:
 
 ```java
-// Add your favorite code example here
+ @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteCategory(@PathVariable int id) {
+        // delete the category by id and return status 204 No Content
+        categoryService.delete(id);
+        return ResponseEntity.status(204).build();
 ```
 
 ### Why It Is My Favorite
 
-Explain what this code does, why you enjoyed building it, and what concepts or skills it demonstrates.
+easiest function to implement
 
 
 ## Author

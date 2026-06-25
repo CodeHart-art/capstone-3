@@ -40,9 +40,17 @@ public class ShoppingCartController
         return ResponseEntity.ok(shoppingCartService.getByUserId(userId));
     }
 
-    // add a POST method to add a product to the cart - the url should be
-    // https://localhost:8080/cart/products/15  (15 is the productId to be added)
-    // return the updated cart with status 201 Created
+    /**
+     * Adds a product to the authenticated user's shopping cart.
+     *
+     * This endpoint retrieves the currently authenticated user from the Principal,
+     * finds the user's ID, and adds the specified product to their shopping cart.
+     * If the product already exists in the cart, its quantity is increased.
+     *
+     * @param principal the authenticated user's security information
+     * @param id the ID of the product to add to the cart
+     * @return a ResponseEntity containing the updated ShoppingCart with a 201 Created status
+     */
     @PostMapping("products/{id}")
     public ResponseEntity<ShoppingCart> addToCart(Principal principal,@PathVariable int id){
 

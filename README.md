@@ -4,7 +4,7 @@
 
 The Store is a Spring Boot e-commerce application that provides the backend services for an online shopping platform. The application allows customers to browse products, manage shopping carts, register accounts, and place orders through a RESTful API connected to a MySQL database.
 
-This project was completed as a capstone project for Year Up United's Application Development program. The primary focus of the project was backend development, bug fixing, API enhancements, and implementing new features while working within an existing codebase.
+The primary focus of the project was backend development, bug fixing, API enhancements, and implementing new features while working within an existing codebase.
 
 ---
 
@@ -126,16 +126,6 @@ http://localhost:8080
 | PUT    | /categories/{id} |
 | DELETE | /categories/{id} |
 
-### Products
-
-| Method | Endpoint       |
-| ------ | -------------- |
-| GET    | /products      |
-| GET    | /products/{id} |
-| POST   | /products      |
-| PUT    | /products/{id} |
-| DELETE | /products/{id} |
-
 ### Shopping Cart
 
 | Method | Endpoint                   |
@@ -143,7 +133,6 @@ http://localhost:8080
 | GET    | /cart                      |
 | POST   | /cart/products/{productId} |
 | PUT    | /cart/products/{productId} |
-| DELETE | /cart/products/{productId} |
 | DELETE | /cart                      |
 
 ---
@@ -189,7 +178,7 @@ One of the most challenging parts of this project was:
 
 ### Why It Was Challenging
 
-Adding a users item to the cart was because i had to account for whether the item existed and if it didn't exist I had to add it to the cart.
+Adding a user's item to the cart was challenging because I had to account for whether the item existed, and if it didn't exist, I had to add it to the cart.
 
 
 ---
@@ -202,7 +191,6 @@ The piece of code I am most proud of is:
  @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCategory(@PathVariable int id) {
-        // delete the category by id and return status 204 No Content
         categoryService.delete(id);
         return ResponseEntity.status(204).build();
 ```

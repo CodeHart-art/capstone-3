@@ -76,13 +76,33 @@ public class CategoriesController {
         return productService.listByCategoryId(categoryId);
     }
 
-    // add annotation to call this method for a POST action
+    /**
+     * Creates a new category.
+     *
+     * This endpoint is restricted to users with the ADMIN role. It accepts a
+     * Category object in the request body, saves it, and returns the newly
+     * created category with a 201 Created status.
+     *
+     * @param category the category to create
+     * @return a ResponseEntity containing the newly created Category
+     */
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         return ResponseEntity.status(201).body(categoryService.create(category));
     }
 
+    /**
+     * Updates an existing category.
+     *
+     * This endpoint is restricted to users with the ADMIN role. It updates the
+     * category with the specified ID using the data provided in the request body
+     * and returns the updated Category.
+     *
+     * @param id the ID of the category to update
+     * @param category the updated category information
+     * @return the updated Category
+     */
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Category updateCategory(@PathVariable int id, @RequestBody Category category) {

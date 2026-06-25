@@ -139,13 +139,12 @@ http://localhost:8080
 
 ## Bugs Fixed
 
-During development several issues in the starter code were identified and corrected, including:
+During development, several issues in the starter code were identified and corrected, including:
 
 * Product filtering logic
 * Category endpoint issues
 * Shopping cart functionality
-* Authentication and authorization errors
-* Data validation improvements
+* Authentication
 * API response handling
 
 ---

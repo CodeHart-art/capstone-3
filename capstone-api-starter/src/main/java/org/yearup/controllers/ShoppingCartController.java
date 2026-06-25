@@ -86,8 +86,16 @@ public class ShoppingCartController
         return ResponseEntity.ok(shoppingCartService.updateCart(userId,productId,item));
     }
 
-    // add a DELETE method to clear all products from the current users cart
-    // https://localhost:8080/cart  - return the (now empty) cart so the front end can refresh it (200 OK)
+    /**
+     * Clears all items from the authenticated user's shopping cart.
+     *
+     * This endpoint retrieves the authenticated user's ID from the Principal,
+     * removes all items from their shopping cart, and returns the updated
+     * (empty) shopping cart.
+     *
+     * @param principal the authenticated user's security information
+     * @return a ResponseEntity containing the empty ShoppingCart
+     */
     @DeleteMapping
     public ResponseEntity<ShoppingCart> clearCart(Principal principal){
         String userName = principal.getName();

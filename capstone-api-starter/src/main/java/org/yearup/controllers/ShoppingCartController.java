@@ -63,9 +63,18 @@ public class ShoppingCartController
     }
 
 
-    // add a PUT method to update an existing product in the cart - the url should be
-    // https://localhost:8080/cart/products/15  (15 is the productId to be updated)
-    // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated; return the cart (200 OK)
+    /**
+     * Updates the quantity of a product in the authenticated user's shopping cart.
+     *
+     * This endpoint retrieves the authenticated user's ID from the Principal,
+     * updates the quantity of the specified product using the provided
+     * ShoppingCartItem, and returns the updated shopping cart.
+     *
+     * @param principal the authenticated user's security information
+     * @param productId the ID of the product to update
+     * @param item the ShoppingCartItem containing the updated quantity
+     * @return a ResponseEntity containing the updated ShoppingCart
+     */
     @PutMapping("products/{productId}")
     public ResponseEntity<ShoppingCart> addMoreToCart(Principal principal, @PathVariable int productId,@RequestBody ShoppingCartItem item){
 

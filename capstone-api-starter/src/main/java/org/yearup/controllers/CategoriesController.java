@@ -110,7 +110,16 @@ public class CategoriesController {
     }
 
 
-
+    /**
+     * Deletes a category by its ID.
+     *
+     * This endpoint is restricted to users with the ADMIN role. It removes the
+     * specified category from the system and returns a 204 No Content response
+     * upon successful deletion.
+     *
+     * @param id the ID of the category to delete
+     * @return a ResponseEntity with a 204 No Content status
+     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCategory(@PathVariable int id) {
